@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activitys.SendImageUsersActivity">
+
+    <Button
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enviar"
+        android:id="@+id/creargrupo"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/maximo_grupo_contador"
+        android:layout_below="@+id/creargrupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="Selecciona un contacto para enviar el archivo"/>
+
+    <TextView
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/texto_mostrar_enviar"
+        android:layout_below="@+id/maximo_grupo_contador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/sinch_purple"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:text=""/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/texto_mostrar_enviar"
+        android:id="@+id/recycler_creargrupos"
+        />
+
+</RelativeLayout>

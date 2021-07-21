@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:title="Cambiar el nombre del Grupo"
+        android:id="@+id/menu_cambiarnombre_grupo"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="Cambiar foto del Grupo"
+        android:id="@+id/menu_foto_grupo"
+        app:showAsAction="never"/>
+
+
+    <item
+        android:title="Salir del Grupo"
+        android:id="@+id/menu_salir_grupo"
+        app:showAsAction="never"/>
+
+</menu>

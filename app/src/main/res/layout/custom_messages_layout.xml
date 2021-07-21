@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_msg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/message_profile_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/profile_image"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        />
+    <TextView
+        android:layout_marginStart="5dp"
+        android:id="@+id/reciver_message_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/message_profile_image"
+        android:background="@drawable/receiver_messages_layout"
+        android:text="reciver message here"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/carview_msg_receiver"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/message_profile_image"
+        android:padding="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="7dp"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="5dp"
+                >
+                <ImageView
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/background"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/gray_scale"
+                    android:layout_margin="2dp"
+                    >
+                    <TextView
+                        android:id="@+id/nombre_res_receiver"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="USUARIO"/>
+                    <ImageView
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/img_msg_receiver"
+                        android:visibility="gone"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:layout_marginStart="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/texto_msg_receiver"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/texto_msg_new_receiver"/>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_voice_receiver"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/message_profile_image"
+        android:background="@drawable/bg_layout_round"
+        android:backgroundTint="@android:color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="-3dp"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btn_play_chat_receiver"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_baseline_play_circle_filled_24"
+                android:clickable="false"
+                android:tint="@color/colorPrimary"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:visibility="visible"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="7dp"
+            >
+
+            <View
+                android:id="@+id/v_length_receiver"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="15dp"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="00:00"
+                android:textSize="13sp"
+                android:id="@+id/duration_receiver"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_seen"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/reciver_message_text"
+        android:visibility="gone"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/message_sender_imageView"
+                />
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/msg_sender_img"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                />
+
+        </LinearLayout>
+
+
+        <VideoView
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:id="@+id/videoSender"/>
+
+        <ImageView
+            android:id="@+id/play_btn_video_sender"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:src="@drawable/play_button"/>
+        <ImageView
+            android:id="@+id/voice_sender_video"
+            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_voice_of"
+            app:tint="@color/white" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/sender_time_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="00:00"
+            android:layout_gravity="bottom"
+            android:gravity="end"
+            android:layout_margin="3dp"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="60dp"
+        app:cardCornerRadius="5dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/message_receiver_imageView"
+                />
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/msg_receiver_img"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <VideoView
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:id="@+id/videoReceiver"/>
+        <ImageView
+            android:id="@+id/voice_receiver_video"
+            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_voice_of"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/play_btn_video_receiver"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:src="@drawable/play_button"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/receiver_time_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="00:00"
+            android:layout_gravity="bottom"
+            android:gravity="end"
+            android:layout_margin="3dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    
+
+
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/make_msg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="@+id/reciver_message_text"
+        android:background="@drawable/select_bg"
+        android:shadowColor="@color/gph_transparent"
+        android:text=""
+        android:textSize="14sp"
+        android:padding="10dp"
+        android:layout_marginEnd="7dp"
+        android:textColor="@android:color/black"/>
+
+
+    <LinearLayout
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/layout_voice"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:visibility="gone"
+        android:background="@drawable/bg_layout_round"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="-3dp"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btn_play_chat"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_baseline_play_circle_filled_24"
+                android:clickable="false"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:visibility="visible"
+                android:background="@color/gph_transparent"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="7dp"
+            >
+            <View
+                android:id="@+id/v_length"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="15dp"
+                android:layout_height="1dp"
+                android:background="@android:color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="00:00"
+                android:textSize="13sp"
+                android:id="@+id/duration"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sender_message_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="@+id/reciver_message_text"
+        android:background="@drawable/sender_messages_layout"
+        android:text="sender message"
+        android:textSize="14sp"
+        android:padding="10dp"
+        android:layout_marginEnd="7dp"
+        android:textColor="@android:color/black"/>
+    
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/carview_msg_sender"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="@+id/reciver_message_text"
+        android:layout_marginEnd="7dp"
+        app:cardElevation="3dp"
+        app:cardCornerRadius="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="5dp"
+                >
+                <ImageView
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/background"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/gray_scale"
+                    android:layout_margin="2dp"
+                    >
+                    <TextView
+                        android:id="@+id/nombre_usuario_respuesta"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="USUARIO"/>
+                    <ImageView
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/img_msg_antiguo"
+                        android:visibility="gone"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+                    <TextView
+                        android:layout_marginStart="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/texto_msg_antiguo"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/texto_msg"/>
+
+            
+            
+        </LinearLayout>
+        
+    </androidx.cardview.widget.CardView>
+
+
+
+    <ImageView
+        android:visibility="invisible"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/novisto"
+        android:id="@+id/visto"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/sender_message_text"
+        android:layout_marginEnd="2dp"/>
+    <TextView
+        android:visibility="invisible"
+        android:text="ggg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_seen1"
+        android:layout_below="@+id/sender_message_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="35dp"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

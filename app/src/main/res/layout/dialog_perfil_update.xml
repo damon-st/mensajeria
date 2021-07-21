@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="ESCRIBE TUS NUEVOS DATOS"
+        android:layout_margin="10dp"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nuevo_dato"
+        android:hint="Escribe tu nuevo Dato"
+        android:padding="10dp"
+        app:met_floatingLabel="normal"
+        />
+
+   <LinearLayout
+       android:layout_margin="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+       <Button
+           android:layout_margin="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="CANCELAR"
+           android:layout_weight="1"
+           android:background="@color/rojo"
+           android:textColor="@color/white"
+           android:textSize="14sp"
+           android:id="@+id/cancelar_update"/>
+       <Button
+           android:layout_margin="5dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="CONFIRMAR"
+           android:layout_weight="1"
+           android:textColor="@color/white"
+           android:textSize="16sp"
+           android:background="@color/colorPrimaryDark"
+           android:id="@+id/confirmar_update"/>
+   </LinearLayout>
+
+</LinearLayout>

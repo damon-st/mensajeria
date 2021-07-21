@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "418375777536",
+    "firebase_url": "https://messenger-72201.firebaseio.com",
+    "project_id": "messenger-72201",
+    "storage_bucket": "messenger-72201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418375777536:android:587ade2ca39ba515b347e5",
+        "android_client_info": {
+          "package_name": "com.damon.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418375777536-7p3f1cp7jphgpdk599jih8us2977oebu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.damon.messenger",
+            "certificate_hash": "2f2aeb11318e5d43c72bd9e647a524bb065a9cda"
+          }
+        },
+        {
+          "client_id": "418375777536-gqjr01flsanli0tg2e67sg87flv4qv2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbrn04A70fOMgxh4E0SgRnZ2fDp6jl3vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418375777536-gqjr01flsanli0tg2e67sg87flv4qv2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:keepScreenOn="true"
+    android:background="#090909">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dip"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+            <LinearLayout android:id="@+id/remoteVideo" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" android:orientation="horizontal"/>
+
+
+            <RelativeLayout android:id="@+id/localVideo" android:layout_width="100dp"
+                android:layout_alignParentRight="true" android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/remoteUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:text=""
+                android:textColor="@color/sinch_purple"
+                android:textSize="28sp"/>
+
+            <TextView
+                android:id="@+id/callState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Llamando..."
+                android:textColor="@color/sinch_purple"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                />
+
+            <TextView
+                android:id="@+id/callDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:text="00:00"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/sinch_purple"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            >
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/disableVideo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/icon_screenshot"
+                    android:gravity="start"
+                    android:layout_marginStart="10dp"
+                    />
+
+            <Button
+                android:id="@+id/disableAudio"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toEndOf="@+id/disableVideo"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/ic_grabar" />
+
+
+                <Button
+                    android:layout_marginStart="40dp"
+                    android:id="@+id/hangupButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_toEndOf="@+id/disableAudio"
+                    android:background="@drawable/cancel_call"/>
+
+
+
+
+        </RelativeLayout>
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

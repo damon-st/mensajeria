@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activitys.FindFriendsActivity">
+
+    <include
+        layout="@layout/app_bar_layout"
+        android:id="@+id/find_frinds_toolbar">
+    </include>
+<RelativeLayout
+    android:layout_below="@+id/find_frinds_toolbar"
+    android:id="@+id/a"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:background="#EEEEEE"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Buscar..."
+        android:id="@+id/search_users"/>
+
+    <Button
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="@drawable/button_background"
+        android:id="@+id/boton_buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/search_users"/>
+</RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/find_friends_recybleList"
+        android:layout_below="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="593dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="11dp"
+        android:scrollbars="vertical"
+        />
+
+    <ProgressBar
+        android:background="@drawable/button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_circular"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

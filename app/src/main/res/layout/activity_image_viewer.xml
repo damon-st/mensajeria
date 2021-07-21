@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".Activitys.ImageViewerActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tollbar"
+        android:background="@android:color/transparent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/proges_dialog_image_viewer"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:indeterminateDuration="@android:integer/config_longAnimTime" />
+    <ImageView
+        android:layout_below="@+id/tollbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/crop_image_menu_flip"
+        android:id="@+id/image_viewer"/>
+
+</RelativeLayout>

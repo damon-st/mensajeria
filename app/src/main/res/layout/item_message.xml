@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginStart="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imagen_sender_grupo"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:layout_marginStart="2dp"
+                android:id="@+id/sender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/message_profile_image"
+                android:background="@drawable/receiver_messages_layout"
+                android:text="reciver message here"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                >
+
+            </TextView>
+
+        </LinearLayout>
+        <TextView
+            android:text="id"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:background="@drawable/sender_messages_layout"
+            android:layout_marginStart="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/message"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
+    </LinearLayout>
+    <ImageView
+        android:visibility="visible"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imagenes_group"/>
+    <Button
+        android:background="@drawable/button_background"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Imagen"
+        android:id="@+id/viewMedia"
+        android:textColor="#fff"
+        android:padding="7dp"
+        />
+</LinearLayout>

@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Messenger</string>
+
+
+    <string name="label_brush">Pincel</string>
+    <string name="label_emoji">Emoji</string>
+    <string name="label_sticker">Sticker</string>
+    <string name="label_eraser">Borrador</string>
+    <string name="label_eraser_mode">Modo borrador</string>
+    <string name="label_text">Texto</string>
+    <string name="label_filter">Filtros</string>
+    <string name="label_adjust">Ajustar</string>
+    <string name="msg_save_image">¿Quieres salir sin guardar la imagen ?</string>
+    <string name="app_intent_name">PhotoEditor</string>
+    <string name="msg_save_image_to_share">Please save image to share</string>
+    <string name="msg_share_image">Share Image</string>>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="developer_email">brayan18-cevallos@hotmail.com</string>
+
+
+    <string name="PRIVACYPOLICY">Politica Privacidad</string>
+    <string name="MENSAJEDEAVISO">DISCULPAS POR LAS MOLESTIAS</string>
+
+    <string name="privacy_message"> <b>Tu informacion jamas sera Publicada</b> <b>Estamos Comprometidos contigo</b> \n
+    Hola! toda informacion tuya al registrarse es totalmente confidencial,todo mensaje que envies es privado y no sera revelado a nadie tu informacion
+    esta protegida!</string>
+    <string name="polity_link">https://prueba1damon.000webhostapp.com/privacidad.html</string>
+    <string name="mensajedeaviso"> <b>De ante mano pido Disculpas</b>\n<b>Al finalizar tu Video Llamada porfavor Reinicia la Aplicacion para que puedas llamar Nueva Mente Gracias</b>\nLa video LLamada solo esta disponible una vez por inicio de Seccion me refiero a que
+      cuando abras esta App tendras Una llamada para que Realizes  y  cuando reinicies la aplicacion volveras a poder llamar  <b>Porfavor solo intenta una vez </b>
+      puedes esperimentar errores si llamas denuevo cuando ayas finalizado la Video Llamada puedes volver a llamar con tan solo Cerrar la Aplicacion\n
+        y volver Abrirla lamento este inconveniente Disculpas</string>
+
+
+    <string name="title_fingerprint">Logueo con un toque</string>
+    <string name="desc_fingerprint">Coloque la yema del dedo en el escáner para verificar su identidad</string>
+    <string name="note">(El inicio de sesión con la huella dactilar hace que la aplicación inicie sesión mucho más rápido.
+        Su dispositivo debe tener al menos una huella digital registrada en la configuración del dispositivo)</string>
+
+    <!-- ca-app-pub-1691614301371531/3114336391  original   -->
+    <!--  ca-app-pub-1691614301371531/9305992619   original  -->
+    <string name="intestalAnuncio">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="bannerAnuncio">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="trimming_progress">Trimming your video...</string>
+    <string name="Ok">Conceder</string>
+    <string name="cancel">Cancelar</string>
+    <string name="permission_read_storage_rationale">Lectura de memoria necesaria para selecionar archivos</string>
+
+<!--  <string name="intestalAnuncio">ca-app-pub-1691614301371531/9305992619</string>-->
+<!--  <string name="bannerAnuncio">ca-app-pub-1691614301371531/3114336391</string>-->
+</resources>

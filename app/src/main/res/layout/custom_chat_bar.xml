@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:src="@drawable/profile_image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/custom_profile_IMAGE"
+        android:cropToPadding="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        />
+    <ImageView
+        android:visibility="visible"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/llamada"
+        android:src="@drawable/icon_call"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="120dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        />
+
+    <ImageView
+        android:visibility="visible"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/video"
+        android:src="@drawable/ic_llamada"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/custom_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Display User"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_toLeftOf="@+id/llamada"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custom_profile_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp"
+        android:text="Ultima Coneccion"
+        android:layout_toLeftOf="@+id/llamada"
+        android:textSize="11sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"/>
+
+    <com.damon.messenger.util.MarqueTextView
+        android:id="@+id/custom_user_last_seen"
+        android:layout_toStartOf="@+id/llamada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/custom_profile_name"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:marqueeRepeatLimit="marquee_forever"/>
+
+</RelativeLayout>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.damon.messenger">
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- <uses-feature android:glEsVersion="0x00020000" android:required="true" /> -->
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
+
+    <application
+        android:name=".editorimagen.PhotoApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:hardwareAccelerated="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activitys.CuentaActivity" />
+        <activity android:name=".Activitys.NuevoSettings" />
+        <activity
+            android:name=".Activitys.SendImageUsersActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="video/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/msword" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.SEND_MULTIPLE" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+
+
+            <!-- <data android:mimeType="image/*" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity android:name=".Activitys.TrimmerActivity" />
+        <activity
+            android:name=".Activitys.UserProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".call.newcall.SinchService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".call.videocall.IncomingCallScreenVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.videocall.CallScreenActivityVideo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.newcall.PlaceCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.newcall.IniciarLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.newcall.CallScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.newcall.IncomingCallScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".call.Call2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activitys.VideoActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".Activitys.MoreIntegrantesGropu" />
+        <activity android:name=".Activitys.ViewGifGrande" />
+        <activity android:name=".Activitys.AddStory" />
+        <activity
+            android:name=".Activitys.FingerprintActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activitys.VideoChatActivity" />
+        <activity android:name=".Activitys.Grabadora" />
+        <activity android:name=".Activitys.CallingActivity" />
+        <activity android:name=".Activitys.IntegrantesGrupoActiviy" />
+        <activity
+            android:name=".Activitys.ColoresChatActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activitys.ChatGrupoActiviy"
+            android:parentActivityName=".Activitys.MainActivity" />
+        <activity android:name=".Activitys.OptionsActivity" />
+        <activity android:name=".Activitys.QuienViomiHistoriaActivity" />
+        <activity android:name=".Activitys.StoryActivity" />
+        <activity android:name=".Activitys.AddStoryActivity" />
+        <activity android:name=".Activitys.CrearGrupoChatActivity" />
+        <activity android:name=".SettingsPerfil.Register" />
+        <activity android:name=".SettingsPerfil.Login" />
+        <activity
+            android:name=".SettingsPerfil.ResetPasswordActivity"
+            android:parentActivityName=".SettingsPerfil.Login" />
+        <activity
+            android:name=".SettingsPerfil.PerfilSettingsActivity"
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".Telefono" />
+        <activity
+            android:name=".Activitys.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activitys.ImageViewerActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activitys.ChatActivity"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".Activitys.MainActivity" />
+        <activity
+            android:name=".Activitys.ProlifeActivity"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".Activitys.FindFriendsActivity"
+            android:parentActivityName=".Activitys.MainActivity" />
+        <activity android:name=".Activitys.PhoneLoginActivity" />
+        <activity android:name=".Activitys.GroupChatActivity" />
+        <activity
+            android:name=".Activitys.SettingsActivity"
+            android:parentActivityName=".Activitys.MainActivity" />
+        <activity android:name=".Activitys.RegisterActivity" />
+        <activity android:name=".Activitys.LoginActivity" />
+        <activity android:name=".Fragments.UsersFragment" />
+        <activity android:name=".Activitys.MainActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+        <service
+            android:name=".Notifications.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1691614301371531~7301440527" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".editorimagen.EditImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- <intent-filter -->
+            <!-- android:label="@string/app_intent_name" -->
+            <!-- android:scheme="file" -->
+            <!-- tools:ignore="AppLinkUrlError"> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <data android:mimeType="image/*" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
