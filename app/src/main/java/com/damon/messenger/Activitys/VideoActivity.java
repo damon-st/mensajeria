@@ -8,9 +8,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -23,12 +25,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.damon.messenger.R;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -40,14 +61,23 @@ import java.util.UUID;
 
 public class VideoActivity extends AppCompatActivity {
 
-    String url;
-    VideoView videoView;
-    ProgressBar progressBar;
-    Toolbar toolbar;
-    String name;
-    boolean ready;
 
-    private ProgressDialog pDialog;
+
+    private PlayerView playerView;
+
+    private SimpleExoPlayer exoPlayer;
+
+    private String url;
+
+    PlayListener playListener;
+
+    ProgressBar progressVideo;
+    String name;
+    private boolean playWhenReady = true;
+    private int currentWindow = 0;
+    private long playbackPosition = 0;
+    private boolean ready;
+    private ImageView dowload_video_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,75 +89,135 @@ public class VideoActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(VideoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
         }
 
-        toolbar = findViewById(R.id.tollbar);
-        setSupportActionBar(toolbar);
 
-        url = getIntent().getStringExtra("url");
-//        Toast.makeText(this, ""+url, Toast.LENGTH_SHORT).show();
-        videoView = findViewById(R.id.video_activity);
-        progressBar = findViewById(R.id.proges_dialog_video);
-        try {
-            videoView.setVideoURI(Uri.parse(url));
-        }catch (Exception e){
-            e.printStackTrace();
+
+        playerView = findViewById(R.id.playerViewActivity);
+        progressVideo = findViewById(R.id.progressBar);
+        dowload_video_img = findViewById(R.id.dowload_video_img);
+
+        Intent intent = getIntent();
+        if (intent !=null){
+            url = intent.getStringExtra("url");
+            playWhenReady = intent.getBooleanExtra("playWhenReady",true);
+            currentWindow = intent.getIntExtra("currentWindow",0);
+            playbackPosition = intent.getLongExtra("playbackPosition",0);
         }
 
-        MediaController mediaController  = new MediaController(this);
-
-
-        videoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-            @Override
-            public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                if ( what == mp.MEDIA_INFO_BUFFERING_START){
-                    progressBar.setVisibility(View.VISIBLE);
-                }else if (what == mp.MEDIA_INFO_BUFFERING_END){
-                    progressBar.setVisibility(View.GONE);
-                }
-                return false;
-            }
-        });
-
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                progressBar.setVisibility(View.GONE);
-                mp.start();
-                ready = true;
-            }
-        });
-
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);
-
         name = UUID.randomUUID().toString();
-    }
+        initializePlayer();
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.descargar_video,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.dowload_video){
+        dowload_video_img.setOnClickListener(v -> {
             if (ready){
                 downloadManager(url);
 
             }else {
                 Toast.makeText(this, "Espere a que cargue el video Porfavor..", Toast.LENGTH_SHORT).show();
             }
-        }
-        return true;
+        });
     }
+
+    private void initializePlayer(){
+        try {
+            playListener = new PlayListener();
+
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter.Builder(getApplication()).build();
+            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+            exoPlayer = (SimpleExoPlayer) ExoPlayerFactory.newSimpleInstance(getApplication());
+            Uri video = Uri.parse(url);
+            DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("video");
+            ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+            MediaSource mediaSource = new ExtractorMediaSource(video, dataSourceFactory, extractorsFactory, null, null);
+            playerView.setPlayer(exoPlayer);
+            if (url.contains("https")){
+                exoPlayer.prepare(mediaSource);
+            }else {
+                ExtractorMediaSource audioSource = new ExtractorMediaSource(
+                        Uri.parse(url),
+                        new DefaultDataSourceFactory(getApplicationContext(),"MyExoplayer"),
+                        new DefaultExtractorsFactory(),
+                        null,
+                        null
+                );
+                exoPlayer.prepare(audioSource);
+            }
+            exoPlayer.setPlayWhenReady(playWhenReady);
+            exoPlayer.seekTo(currentWindow, playbackPosition);
+            exoPlayer.addListener(playListener);
+            playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+            exoPlayer.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+
+
+
+
+
+
+        } catch (Exception e) {
+            Log.e("ViewHolder2", "exoplayer error" + e.toString());
+        }
+    }
+
+
+
+
+    @SuppressLint("InlinedApi")
+    private void hideSystemUi() {
+        playerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUi();
+    }
+
+
+    private class PlayListener implements Player.EventListener{
+        @Override
+        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+            String stateString;
+            switch (playbackState) {
+                case ExoPlayer.STATE_IDLE:
+                    stateString = "ExoPlayer.STATE_IDLE      -";
+                    progressVideo.setVisibility(View.VISIBLE);
+                    break;
+                case ExoPlayer.STATE_BUFFERING:
+                    stateString = "ExoPlayer.STATE_BUFFERING -";
+                    progressVideo.setVisibility(View.VISIBLE);
+                    break;
+                case ExoPlayer.STATE_READY:
+                    stateString = "ExoPlayer.STATE_READY     -";
+                    progressVideo.setVisibility(View.GONE);
+                    ready = true;
+                    break;
+                case ExoPlayer.STATE_ENDED:
+                    stateString = "ExoPlayer.STATE_ENDED     -";
+                    progressVideo.setVisibility(View.GONE);
+
+                    break;
+                default:
+                    stateString = "UNKNOWN_STATE             -";
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (exoPlayer != null){
+            exoPlayer.release();
+            exoPlayer = null;
+        }
+        finish();
+    }
+
+
 
     private void downloadManager(String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));

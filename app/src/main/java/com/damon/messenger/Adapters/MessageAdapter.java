@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,11 +44,15 @@ import com.damon.messenger.PlayVideo;
 import com.damon.messenger.R;
 import com.damon.messenger.interfaces.EstaFocusMsg;
 import com.damon.messenger.interfaces.OnClickListener;
+import com.damon.messenger.interfaces.VideoPlaying;
 import com.damon.messenger.interfaces.onClickResMsg;
 import com.damon.messenger.util.AES;
 import com.damon.messenger.util.AudioService;
 import com.damon.messenger.util.TimeAgo;
 import com.damon.messenger.viewholders.FechaHeaderViewHolder;
+import com.damon.messenger.viewholders.MessageViewHolder;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,6 +67,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,7 +78,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>
+public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder>
             implements StickyRecyclerHeadersAdapter<FechaHeaderViewHolder> {
 
 private List<Messages> usermessagesList;
@@ -92,82 +100,24 @@ private String date;
     private int current_selected_idx = -1;
 
 
+    private VideoPlaying videoPlaying;
+
 
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    public MessageAdapter(List<Messages>usermessagesList, Activity context,onClickResMsg onClickResMsg,EstaFocusMsg estaFocusMsg){
+    public MessageAdapter(List<Messages>usermessagesList, Activity context,onClickResMsg onClickResMsg,EstaFocusMsg estaFocusMsg,VideoPlaying videoPlaying){
     this.usermessagesList = usermessagesList;
     this.context = context;
     this.audioService = new AudioService(context);
     selected_items = new SparseBooleanArray();
     this.onClickResMsg = onClickResMsg;
     this.estaFocusMsg = estaFocusMsg;
-
+    this.videoPlaying = videoPlaying;
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder{
 
-
-        public TextView senderMessageText , reciverMessageText,duration_audio,duration_audio_receiver,nombreUsuarioRespuesta,
-        texto_aresponder_sender,texto_respuesta_sender,nombreUsuarioRespuestaReceiver,texto_aresponder_receiver,texto_respuesta_receiver,
-        msg_img_sender,msg_img_receiver;
-        public CircleImageView reciverProfileImage;
-        public ImageView messageSenderPicture,messageReceiverPicture,img_responder_sender,img_responder_receiver;
-        public TextView txt_seen1, txt_seen,make_msg_sender,time_video_sender,time_video_receiver;
-        public ImageView visto;
-        public RelativeLayout lyt_parent;
-        public LinearLayout layout_voice,layout_voice_receiver;
-        public ImageButton btn_play_auido;
-        public CardView card_sender,card_receiver;
-        public ImageView play_btn_sender,play_btn_receiver,voice_video_sender,voice_video_receiver;
-        public VideoView videoViewSender,videoViewReceiver;
-
-
-
-
-        public MessageViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            senderMessageText = itemView.findViewById(R.id.sender_message_text);
-            reciverMessageText = itemView.findViewById(R.id.reciver_message_text);
-            reciverProfileImage = itemView.findViewById(R.id.message_profile_image);
-            messageSenderPicture = itemView.findViewById(R.id.message_sender_imageView);
-            messageReceiverPicture = itemView.findViewById(R.id.message_receiver_imageView);
-            txt_seen = itemView.findViewById(R.id.txt_seen);
-            txt_seen1 = itemView.findViewById(R.id.txt_seen1);
-            visto = itemView.findViewById(R.id.visto);
-            make_msg_sender = itemView.findViewById(R.id.make_msg);
-            lyt_parent = itemView.findViewById(R.id.layout_msg);
-            layout_voice = itemView.findViewById(R.id.layout_voice);
-            btn_play_auido = itemView.findViewById(R.id.btn_play_chat);
-            duration_audio = itemView.findViewById(R.id.duration);
-            layout_voice_receiver = itemView.findViewById(R.id.layout_voice_receiver);
-            duration_audio_receiver = itemView.findViewById(R.id.duration_receiver);
-            card_sender = itemView.findViewById(R.id.carview_msg_sender);
-            nombreUsuarioRespuesta = itemView.findViewById(R.id.nombre_usuario_respuesta);
-            texto_aresponder_sender = itemView.findViewById(R.id.texto_msg_antiguo);
-            texto_respuesta_sender = itemView.findViewById(R.id.texto_msg);
-            img_responder_sender = itemView.findViewById(R.id.img_msg_antiguo);
-            card_receiver = itemView.findViewById(R.id.carview_msg_receiver);
-            nombreUsuarioRespuestaReceiver = itemView.findViewById(R.id.nombre_res_receiver);
-            img_responder_receiver = itemView.findViewById(R.id.img_msg_receiver);
-            texto_aresponder_receiver = itemView.findViewById(R.id.texto_msg_receiver);
-            texto_respuesta_receiver = itemView.findViewById(R.id.texto_msg_new_receiver);
-            play_btn_sender = itemView.findViewById(R.id.play_btn_video_sender);
-            play_btn_receiver = itemView.findViewById(R.id.play_btn_video_receiver);
-            videoViewSender = itemView.findViewById(R.id.videoSender);
-            voice_video_sender = itemView.findViewById(R.id.voice_sender_video);
-            videoViewReceiver = itemView.findViewById(R.id.videoReceiver);
-            voice_video_receiver = itemView.findViewById(R.id.voice_receiver_video);
-            time_video_sender= itemView.findViewById(R.id.sender_time_video);
-            time_video_receiver = itemView.findViewById(R.id.receiver_time_video);
-            msg_img_sender = itemView.findViewById(R.id.msg_sender_img);
-            msg_img_receiver = itemView.findViewById(R.id.msg_receiver_img);
-
-        }
-    }
 
     @NonNull
     @Override
@@ -178,7 +128,7 @@ private String date;
       mAuth = FirebaseAuth.getInstance();
 
 
-      return new MessageViewHolder(view);
+      return new MessageViewHolder(view,videoPlaying);
     }
 
 
@@ -289,7 +239,7 @@ private String date;
         holder.messageReceiverPicture.setVisibility(View.GONE);
         holder.play_btn_receiver.setVisibility(View.GONE);
         holder.play_btn_sender.setVisibility(View.GONE);
-        holder.videoViewSender.setVisibility(View.GONE);
+        holder.video_layout_sender.setVisibility(View.GONE);
         holder.voice_video_sender.setVisibility(View.GONE);
         holder.voice_video_receiver.setVisibility(View.GONE);
         holder.videoViewReceiver.setVisibility(View.GONE);
@@ -696,34 +646,8 @@ private String date;
             if (fromUserID.equals(messageSenderID)){
                 //esto es para archivos y lo descargara el que envia
 //                holder.messageSenderPicture.setVisibility(View.VISIBLE);
-                try {
-                    holder.videoViewSender.setVideoPath(messages.getMessage());
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                holder.videoViewSender.setVisibility(View.VISIBLE);
-                holder.voice_video_sender.setVisibility(View.VISIBLE);
-                holder.time_video_sender.setVisibility(View.VISIBLE);
-                holder.videoViewSender.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mp.setVolume(0,0);
-                        mp.start();
-                        mp.setLooping(true);
-
-                        holder.time_video_sender.setText(getTimeVideo(mp.getDuration()/1000));
-
-                        float videoRatio = mp.getVideoWidth()/(float)mp.getVideoHeight();
-                        float screenRatio = holder.videoViewSender.getWidth() / (float) holder.videoViewSender.getHeight();
-
-                        float scale = videoRatio / screenRatio;
-                        if (scale >=1f){
-                            holder.videoViewSender.setScaleX(scale);
-                        }else {
-                            holder.videoViewSender.setScaleY(1f/scale);
-                        }
-                    }
-                });
+                holder.video_layout_sender.setVisibility(View.VISIBLE);
+                holder.setVideo(context.getApplication(),messages.getMessage());
                 //  holder.messageSenderPicture.setBackgroundResource(R.drawable.file);
                 //estas linea es para que descargue desde la base de datos la imagen del icono de archivos
                 holder.play_btn_sender.setVisibility(View.VISIBLE);
@@ -1088,12 +1012,11 @@ private String date;
                             }
                         });
                     }else if (usermessagesList.get(i).getType().equals("mp4")){
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        holder.play_btn_sender.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(context, VideoActivity.class);
-                                intent.putExtra("url",usermessagesList.get(i).getMessage());
-                                context.startActivity(intent);
+                                holder.VideoActivity(context,messages.getMessage());
+
                             }
                         });
 
@@ -1647,5 +1570,12 @@ private String date;
         int mn = rem / 60;
         int sec = rem % 60;
         return String.format("%02d",hr)+  ":" + String.format("%02d",mn)+ ":" + String.format("%02d",sec);
+    }
+
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull @NotNull MessageViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.pararVideo();
     }
 }

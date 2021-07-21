@@ -79,6 +79,7 @@ import com.damon.messenger.call.videocall.Datos;
 import com.damon.messenger.editorimagen.EditImageActivity;
 import com.damon.messenger.interfaces.EstaFocusMsg;
 import com.damon.messenger.interfaces.OnClickListener;
+import com.damon.messenger.interfaces.VideoPlaying;
 import com.damon.messenger.interfaces.onClickResMsg;
 import com.damon.messenger.util.AES;
 import com.damon.messenger.util.MarqueTextView;
@@ -90,6 +91,7 @@ import com.devlomi.record_view.RecordView;
 import com.giphy.sdk.core.models.Media;
 import com.giphy.sdk.ui.Giphy;
 import com.giphy.sdk.ui.views.GiphyDialogFragment;
+import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -140,7 +142,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChatActivity extends BaseActivity implements GiphyDialogFragment.GifSelectionListener, SinchService.StartFailedListener, onClickResMsg,
-        EstaFocusMsg {
+        EstaFocusMsg, VideoPlaying {
 
     private static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
     Bundle bundle = new Bundle();
@@ -1016,7 +1018,7 @@ public class ChatActivity extends BaseActivity implements GiphyDialogFragment.Gi
                 btnEmoji = findViewById(R.id.btn_emoji);
                 btn_camera = findViewById(R.id.btn_camera);
 
-                messageAdapter = new MessageAdapter(messagesList,ChatActivity.this,ChatActivity.this,ChatActivity.this);
+                messageAdapter = new MessageAdapter(messagesList,ChatActivity.this,ChatActivity.this,ChatActivity.this,ChatActivity.this::isPlaying);
                 usersMessagesList = findViewById(R.id.private_messages_list_of_users);
                 linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
                 usersMessagesList.setLayoutManager(linearLayoutManager);
@@ -2751,7 +2753,11 @@ public class ChatActivity extends BaseActivity implements GiphyDialogFragment.Gi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         crearEscribiendo(messagemSenderID,messageReciverID,"no");
+        if (exoPlayer != null ){
+            exoPlayer.release();
+        }
         finish();
     }
 
@@ -2912,6 +2918,15 @@ public class ChatActivity extends BaseActivity implements GiphyDialogFragment.Gi
 //        if (focus){
 //            date_msg.setText(messages.getDate());
 //        }
+    }
+
+    SimpleExoPlayer exoPlayer;
+
+    @Override
+    public void isPlaying(SimpleExoPlayer simpleExoPlayer, boolean isplaying) {
+        if (simpleExoPlayer != null ){
+            exoPlayer = simpleExoPlayer;
+        }
     }
 
 

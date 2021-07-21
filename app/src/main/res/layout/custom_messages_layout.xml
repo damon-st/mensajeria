@@ -195,7 +195,7 @@
             android:orientation="vertical">
             <ImageView
                 android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:id="@+id/message_sender_imageView"
                 />
@@ -211,10 +211,76 @@
         </LinearLayout>
 
 
-        <VideoView
+        <FrameLayout
+            android:id="@+id/video_layout"
             android:layout_width="150dp"
             android:layout_height="250dp"
-            android:id="@+id/videoSender"/>
+            android:visibility="visible"
+            android:background="@android:color/black"
+            >
+
+
+
+
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ep_video_view"
+                app:resize_mode="fill"
+                android:backgroundTint="@color/colorPrimary"
+                />
+
+
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/video_expan"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_video_play"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/ic_voice"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_voice_of"
+                app:tint="@android:color/white"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/time_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:text="00:00"
+                android:layout_gravity="bottom"
+                android:gravity="end"
+                android:layout_margin="10dp"
+                />
+
+
+
+            <ProgressBar
+                android:id="@+id/progress_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                />
+
+        </FrameLayout>
+
+
+
 
         <ImageView
             android:id="@+id/play_btn_video_sender"

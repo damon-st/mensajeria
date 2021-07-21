@@ -155,4 +155,13 @@ dependencies {
 
     //libreria stickerHeader
     implementation 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
+
+
+    //librerai de expliare
+    implementation 'com.google.android.exoplayer:exoplayer:2.10.8'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.10.8'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.8'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.10.8'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.10.8'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.8'
 }
