@@ -245,11 +245,21 @@
 
             <ImageView
                 android:id="@+id/ic_voice"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_voice_of"
                 app:tint="@android:color/white"
                 android:layout_gravity="start"
+                android:layout_margin="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/ic_expan_sender"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_expan"
+                app:tint="@android:color/white"
+                android:layout_gravity="end"
                 android:layout_margin="10dp"
                 />
 

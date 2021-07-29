@@ -67,6 +67,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
                     String image = dataSnapshot.child("image").getValue().toString();
 
                     Picasso.get().load(image)
+                            .networkPolicy(NetworkPolicy.OFFLINE)
                             .resize(75,75)
                             .into(holder.image_grupo, new Callback() {
                                 @Override

@@ -57,7 +57,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
     public LinearLayout layout_voice,layout_voice_receiver;
     public ImageButton btn_play_auido;
     public CardView card_sender,card_receiver;
-    public ImageView play_btn_sender,play_btn_receiver,voice_video_sender,voice_video_receiver,voice_off;
+    public ImageView play_btn_sender,play_btn_receiver,voice_video_sender,voice_video_receiver,voice_off,ic_expan_sender;
     public VideoView videoViewReceiver;
 
     public FrameLayout video_layout_sender;
@@ -102,6 +102,8 @@ public class MessageViewHolder extends RecyclerView.ViewHolder{
         texto_respuesta_receiver = itemView.findViewById(R.id.texto_msg_new_receiver);
         play_btn_sender = itemView.findViewById(R.id.play_btn_video_sender);
         play_btn_receiver = itemView.findViewById(R.id.play_btn_video_receiver);
+
+        ic_expan_sender = itemView.findViewById(R.id.ic_expan_sender);
 
         video_layout_sender = itemView.findViewById(R.id.video_layout);
 

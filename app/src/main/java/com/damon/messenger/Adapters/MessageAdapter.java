@@ -64,6 +64,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
@@ -623,7 +625,7 @@ private String date;
 
                 holder.messageSenderPicture.setVisibility(View.VISIBLE);
                 try {
-                    Glide.with(context.getApplicationContext()).load(messages.getMessage()).override(100,100).into(holder.messageSenderPicture);
+                    Glide.with(context.getApplicationContext()).load(messages.getMessage()).diskCacheStrategy(DiskCacheStrategy.ALL).override(100,100).into(holder.messageSenderPicture);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -633,7 +635,7 @@ private String date;
                 holder.messageReceiverPicture.setVisibility(View.VISIBLE);
 
                 try {
-                    Glide.with(context.getApplicationContext()).load(messages.getMessage()).override(100,100).into(holder.messageReceiverPicture);
+                    Glide.with(context.getApplicationContext()).load(messages.getMessage()).diskCacheStrategy(DiskCacheStrategy.ALL).override(100,100).into(holder.messageReceiverPicture);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -650,8 +652,11 @@ private String date;
                 holder.setVideo(context.getApplication(),messages.getMessage());
                 //  holder.messageSenderPicture.setBackgroundResource(R.drawable.file);
                 //estas linea es para que descargue desde la base de datos la imagen del icono de archivos
-                holder.play_btn_sender.setVisibility(View.VISIBLE);
+                holder.play_btn_sender.setVisibility(View.GONE);
                 holder.play_btn_sender.setAlpha(0.4f);
+                holder.ic_expan_sender.setOnClickListener(v -> {
+                    holder.VideoActivity(context,messages.getMessage());
+                });
 //                try {
 //                    Glide.with(context.getApplicationContext()).load(messages.getMessage()).override(150,150).into(holder.messageSenderPicture);
 //                }catch (Exception e){
@@ -762,13 +767,13 @@ private String date;
                                         if (position ==0){
 
                                             DeleteSentMessages(i,holder);
-                                            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                       //     Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+                                       //     holder.itemView.getContext().startActivity(intent);
 
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                        //    Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                        //    holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -810,13 +815,13 @@ private String date;
                                         if (position ==0){
 
                                             DeleteSentMessages(i,holder);
-                                            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                            //Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+                                            //holder.itemView.getContext().startActivity(intent);
 
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                            //Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                           // holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -854,14 +859,14 @@ private String date;
                                         if (position ==0){
 
                                             DeleteSentMessages(i,holder);
-                                            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                           // Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+                                           // holder.itemView.getContext().startActivity(intent);
 
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
                                             EliminarImage(usermessagesList.get(i).getMessage());
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                           // Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                           // holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -950,14 +955,14 @@ private String date;
                                         if (position ==0){
                                             DeleteSentMessages(i,holder);
 
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                          //  Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                          //  holder.itemView.getContext().startActivity(intent);
 
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
                                             EliminarImage(usermessagesList.get(i).getMessage());
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                          //  Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                          //  holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -996,13 +1001,13 @@ private String date;
                                         if (position ==0){
                                             DeleteSentMessages(i,holder);
 
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                            //Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                            //holder.itemView.getContext().startActivity(intent);
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
 
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                          //  Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                          //  holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -1012,10 +1017,10 @@ private String date;
                             }
                         });
                     }else if (usermessagesList.get(i).getType().equals("mp4")){
-                        holder.play_btn_sender.setOnClickListener(new View.OnClickListener() {
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                holder.VideoActivity(context,messages.getMessage());
+                            //    holder.VideoActivity(context,messages.getMessage());
 
                             }
                         });
@@ -1038,13 +1043,13 @@ private String date;
                                         if (position ==0){
                                             DeleteSentMessages(i,holder);
 
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                           // Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                           // holder.itemView.getContext().startActivity(intent);
                                         }else if (position==2){
                                             DeleteMessageForEveryone(i,holder);
                                             EliminarImage(usermessagesList.get(i).getMessage());
-                                            Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
+                                            //Intent intent = new Intent(holder.itemView.getContext(),MainActivity.class);
+                                           // holder.itemView.getContext().startActivity(intent);
                                         }
 
                                     }
@@ -1411,7 +1416,10 @@ private String date;
 
     @Override
     public long getHeaderId(int position) {
-        return usermessagesList.get(position).getFechaTransfor().getDay();
+        Calendar calendar  = Calendar.getInstance();
+        calendar.setTime(usermessagesList.get(position).getFechaTransfor());
+        return calendar.get(Calendar.DAY_OF_MONTH);
+        //return usermessagesList.get(position).getFechaTransfor().getDay();
     }
 
     @Override
@@ -1448,6 +1456,12 @@ private String date;
              public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(holder.itemView.getContext(), "Eliminado Correcto", Toast.LENGTH_SHORT).show();
+                    try{
+                        usermessagesList.remove(position);
+                        notifyItemRemoved(position);
+                    }catch (Exception e){
+
+                    }
                 }else {
                     Toast.makeText(holder.itemView.getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
@@ -1467,6 +1481,13 @@ private String date;
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(holder.itemView.getContext(), "Eliminado Correcto", Toast.LENGTH_SHORT).show();
+                    try{
+                        usermessagesList.remove(position);
+                        notifyItemRemoved(position);
+                    }catch (Exception e){
+
+                    }
+
                 }else {
                     Toast.makeText(holder.itemView.getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
@@ -1494,6 +1515,13 @@ private String date;
                         public void onComplete(@NonNull Task<Void> task) {
                               if (task.isSuccessful()){
                                   Toast.makeText(holder.itemView.getContext(), "Eliminado Correcto", Toast.LENGTH_SHORT).show();
+                                  try{
+                                      usermessagesList.remove(position);
+                                      notifyItemRemoved(position);
+                                  }catch (Exception e){
+
+                                  }
+
                               }
                         }
                     });

@@ -2,6 +2,8 @@ package com.damon.messenger.editorimagen;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by Burhanuddin Rashid on 1/23/2018.
  */
@@ -14,6 +16,7 @@ public class PhotoApp extends Application {
     public void onCreate() {
         super.onCreate();
         sPhotoApp = this;
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
      /*   FontRequest fontRequest = new FontRequest(
                 "com.google.android.gms.fonts",
                 "com.google.android.gms",
