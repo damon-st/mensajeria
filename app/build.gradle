@@ -62,7 +62,7 @@ dependencies {
 
 
 
-    implementation 'com.google.firebase:firebase-ads:19.1.0'
+//    implementation 'com.google.firebase:firebase-ads:19.1.0'
 
     //librearia para notificacion mesaje
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'

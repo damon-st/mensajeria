@@ -42,10 +42,7 @@ import com.damon.messenger.call.videocall.CallScreenActivityVideo;
 import com.damon.messenger.util.AES;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -119,7 +116,6 @@ public class ChatsFragment extends Fragment {
     private RecyclerView.LayoutManager mChatListLayoutManager;
 
     private static final String APP_ID ="ca-app-pub-1691614301371531~7301440527";
-    private InterstitialAd mIntertitialAd;
     FirebaseRecyclerOptions<Contacts> options;
     FirebaseRecyclerAdapter<Contacts,ChatsViewHolder> adapter;
 
@@ -176,22 +172,6 @@ public class ChatsFragment extends Fragment {
 
         setCurrentUserID();
 
-        MobileAds.initialize(getContext(), APP_ID);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mIntertitialAd = new InterstitialAd(getContext());
-        mIntertitialAd.setAdUnitId(getResources().getString(R.string.intestalAnuncio));//ay que cambiar por id true
-        mIntertitialAd.loadAd(adRequest);
-
-
-        mIntertitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mIntertitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-        });
 
 
 
@@ -337,9 +317,7 @@ public class ChatsFragment extends Fragment {
                                             @Override
                                             public void onClick(View v) {
 
-                                                if (mIntertitialAd.isLoaded()){
-                                                    mIntertitialAd.show();
-                                                }
+
                                                 Intent chatintent = new Intent(getContext(), ChatActivity.class);
                                                 chatintent.putExtra("userid",usersID);
                                                 chatintent.putExtra("name",retName);

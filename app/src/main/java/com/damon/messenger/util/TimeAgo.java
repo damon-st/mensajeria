@@ -25,7 +25,7 @@ public class TimeAgo {
         }else if (hours ==1){
             return " hoy";
         }else if (hours > 1 && hours < 24){
-            return  "hoy";
+            return  "hace " + hours+ " horas";
         }else if (days ==1){
             return  " ayer";
         }else {

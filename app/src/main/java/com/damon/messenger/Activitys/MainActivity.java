@@ -1,20 +1,9 @@
 package com.damon.messenger.Activitys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -27,24 +16,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bumptech.glide.Glide;
-import com.damon.messenger.Notifications.Data;
+import com.damon.messenger.Adapters.TabsAccessorAdapter;
 import com.damon.messenger.R;
 import com.damon.messenger.SettingsPerfil.Login;
 import com.damon.messenger.SettingsPerfil.PerfilSettingsActivity;
-import com.damon.messenger.Adapters.TabsAccessorAdapter;
 import com.damon.messenger.call.newcall.BaseActivity;
-import com.damon.messenger.call.newcall.PlaceCallActivity;
 import com.damon.messenger.call.newcall.SinchService;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.ContentViewCallback;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +44,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sinch.android.rtc.SinchError;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -89,8 +79,9 @@ public class MainActivity extends BaseActivity implements SinchService.StartFail
     private String salir;
 
     private static final String APP_ID ="ca-app-pub-1691614301371531~7301440527";
-    private InterstitialAd mIntertitialAd;
     ProgressDialog mSpinner;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,22 +133,6 @@ public class MainActivity extends BaseActivity implements SinchService.StartFail
 
 
 
-        MobileAds.initialize(this,APP_ID);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mIntertitialAd = new InterstitialAd(this);
-        mIntertitialAd.setAdUnitId(getResources().getString(R.string.intestalAnuncio));
-        mIntertitialAd.loadAd(adRequest);
-
-
-        mIntertitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mIntertitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-        });
 
 
 
@@ -339,42 +314,25 @@ public class MainActivity extends BaseActivity implements SinchService.StartFail
             SendToLoginActivity();
         }
         if (item.getItemId() == R.id.main_settings_option) {
-            if (mIntertitialAd.isLoaded()){
-                mIntertitialAd.show();
-            }else {
 
-            }
             SendToSettingsActivity();
 
 
 
         }
         if (item.getItemId() == R.id.main_find_friends_option) {
-            if (mIntertitialAd.isLoaded()){
-                mIntertitialAd.show();
-            }else {
-
-            }
 
             SendToFindFriendsActivity();
 
         }
         if (item.getItemId() == R.id.main_create_group_option) {
             // RequestNewGroup();
-            if (mIntertitialAd.isLoaded()){
-                mIntertitialAd.show();
-            }else {
 
-            }
             Intent intent = new Intent(getApplicationContext(), CrearGrupoChatActivity.class);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.main_options) {
-            if (mIntertitialAd.isLoaded()){
-                mIntertitialAd.show();
-            }else {
 
-            }
             Intent intent = new Intent(getApplicationContext(), NuevoSettings.class);
             startActivity(intent);
         }
@@ -560,16 +518,16 @@ public class MainActivity extends BaseActivity implements SinchService.StartFail
     }
 
     private void openPlaceCallActivity() {
-        mSpinner.dismiss();
+         mSpinner.dismiss();
 //        Intent mainActivity = new Intent(this, PlaceCallActivity.class);
 //        startActivity(mainActivity);
     }
-
     private void showSpinner() {
 
         mSpinner.setTitle("Conectando con Servidores");
         mSpinner.setMessage("Por favor Espera...");
         mSpinner.show();
+
     }
 
 

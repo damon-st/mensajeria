@@ -14,9 +14,7 @@ import android.widget.Toast;
 
 import com.damon.messenger.Dialog.DialogFragment;
 import com.damon.messenger.R;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,10 +80,7 @@ public class ProlifeActivity extends AppCompatActivity {
 
         current_state = "new";
 
-        MobileAds.initialize(this,APP_ID);
-        AdView adView = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+
 
         RetriveUserInfo();
 
